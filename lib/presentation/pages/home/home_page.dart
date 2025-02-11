@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               ),
              const SizedBox(height: 20,),
               FloatingActionButton(
-                onPressed: () => context.push('/expenseform'),
+                onPressed: () => context.push('/analysispage'),
                 child: Icon(Icons.analytics),
               ),
             ],

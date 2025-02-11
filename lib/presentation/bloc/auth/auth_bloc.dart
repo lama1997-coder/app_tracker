@@ -24,7 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final user = await registerUseCase(event.email, event.password);
         user.fold(
           (failure) => emit(AuthFailure(failure.message)), // Error Case
-          (user) => emit(AuthSuccess(user)), // Success Case
+          (user) => emit(AuthRegisterSuccess(user)), // Success Case
         );
       } catch (e) {
         emit(AuthFailure(e.toString()));

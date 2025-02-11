@@ -1,16 +1,28 @@
 # app_tracker
 
-A new Flutter project.
+## Description
 
-## Getting Started
+This is an Expense Tracker App built using Flutter, Clean Architecture, and BLoC. The app helps users track their daily expenses, categorize them, and provide insights into their spending habits.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- User Sign in/Sing up using Firebase Authentication
+- Track Expenses by using hive
+- Categorize Transactions and Currency
+- View Expense Analysis Chart
+- Support for Multiple Currencies
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Tech Stack
+
+- **Frontend**: Flutter, Dart
+- **State Management**: BLoC 
+- **Architecture**: Clean Architecture
+- **Database**: SQLite (or any other database you're using)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/lama1997-coder/app_tracker.git

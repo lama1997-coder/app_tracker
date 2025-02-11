@@ -18,7 +18,7 @@ class OnboardingPage extends StatelessWidget {
             },title  : "Get Started",)
             ,InkWell(
               onTap: () {
-                context.go("/login");
+                context.go("/login",extra: true);
               },
                 child: DefaultText(title: "Already have account? Log In",style: Theme.of(context).textTheme.headlineSmall,))
 

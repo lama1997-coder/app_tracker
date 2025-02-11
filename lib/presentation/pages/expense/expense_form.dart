@@ -22,7 +22,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
       expenseData.titleController.text = widget.expense!.title;
       context.read<CategoryCubit>().changeCategory(widget.expense!.category);
       expenseData.amountController.text = widget.expense!.amount.toString();
-      context.read()<CurrencyCubit>().changeCurrency(widget.expense!.currency);
+      context.read<CurrencyCubit>().changeCurrency(widget.expense!.currency);
     }
   }
 
@@ -122,28 +122,28 @@ class _ExpenseFormState extends State<ExpenseForm> {
                 },
                 title: 'Add Expense',
               ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<ExpenseBloc>().add(GetMonthlyExpenseEvent(
-                      DateTime.now().year,
-                      DateTime.now().month,
-                      'USD'));
-                },
-                child: Text('Get Monthly Expenses'),
-              ),
-              BlocBuilder<ExpenseBloc, ExpenseState>(
-                builder: (context, state) {
-                  if (state is ExpenseLoading) {
-                    return CircularProgressIndicator();
-                  } else if (state is MonthlyExpenseLoaded) {
-                    return AnalysisPage(expenses: state.total);
-                  } else if (state is ExpenseError) {
-                    return Text('Error: ${state.message}',
-                        style: TextStyle(color: Colors.red));
-                  }
-                  return Container();
-                },
-              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     context.read<ExpenseBloc>().add(GetMonthlyExpenseEvent(
+              //         DateTime.now().year,
+              //         DateTime.now().month,
+              //         'USD'));
+              //   },
+              //   child: Text('Get Monthly Expenses'),
+              // ),
+              // BlocBuilder<ExpenseBloc, ExpenseState>(
+              //   builder: (context, state) {
+              //     if (state is ExpenseLoading) {
+              //       return CircularProgressIndicator();
+              //     } else if (state is MonthlyExpenseLoaded) {
+              //       return AnalysisPage(expenses: state.total);
+              //     } else if (state is ExpenseError) {
+              //       return Text('Error: ${state.message}',
+              //           style: TextStyle(color: Colors.red));
+              //     }
+              //     return Container();
+              //   },
+              // ),
             ],
           ),
         ),

@@ -11,11 +11,9 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-
       body: BackgroundAppbarWidget(
         borderRadius: BorderRadius.zero,
         height: double.infinity,
-
         child: SingleChildScrollView(
           child: Padding(
             padding: PaddingConstants.screenPadding,
@@ -25,21 +23,21 @@ class AuthScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 Container(
                   padding: PaddingConstants.screenPadding,
-
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16)),
                   child: BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
-                      if(state is AuthSuccess &&isLogin){
+                      if (state is AuthSuccess ) {
                         context.go("/home");
                       }
-                      if(state is AuthSuccess && !isLogin){
-                        context.go("/login");
+                      if (state is AuthRegisterSuccess ) {
+                        context.go("/login",extra: true);
                       }
                       if (state is AuthSuccess) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Success: ${state.user.email}")),
+                          SnackBar(
+                              content: Text("Success: ${state.user.email}")),
                         );
                       } else if (state is AuthFailure) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -47,7 +45,6 @@ class AuthScreen extends StatelessWidget {
                         );
                       }
                     },
-
                     builder: (context, state) {
                       if (state is AuthLoading) {
                         return CircularProgressIndicator();
@@ -56,46 +53,54 @@ class AuthScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           DefaultText(
-                            title:isLogin?S.of(context).loginTitle: S.of(context).register_prompt,
+                            title: isLogin
+                                ? S.of(context).loginTitle
+                                : S.of(context).register_prompt,
                             size: Style.bigFontSize(context),
                             fontWeight: FontWeight.w600,
                             color: ThemeDataProvider.textLightGreyThemeColor,
-
                           ),
                           const SizedBox(height: 5),
                           DefaultText(
-                            title:isLogin? S.of(context).loginSubtitle: S.of(context).register_greeting,
+                            title: isLogin
+                                ? S.of(context).loginSubtitle
+                                : S.of(context).register_greeting,
                             color: ThemeDataProvider.textLightGreyThemeColor,
                             size: 15,
                           ),
                           const SizedBox(height: 30),
-                          DefaultForm(controller: emailController, title: S.of(context).email),
+                          DefaultForm(
+                              controller: emailController,
+                              title: S.of(context).email),
                           const SizedBox(height: 20),
-
-                          DefaultForm(controller: passwordController, title: S.of(context).password),
+                          DefaultForm(
+                              controller: passwordController,
+                              title: S.of(context).password),
                           SizedBox(height: 20),
-
                           DefaultButton(
                             onTap: () {
                               if (isLogin) {
                                 context.read<AuthBloc>().add(
-                                  AuthLoginEvent(emailController.text, passwordController.text),
-
-                                );
+                                      AuthLoginEvent(emailController.text,
+                                          passwordController.text),
+                                    );
                               } else {
                                 context.read<AuthBloc>().add(
-                                  AuthRegisterEvent(emailController.text, passwordController.text),
-                                );
+                                      AuthRegisterEvent(emailController.text,
+                                          passwordController.text),
+                                    );
                               }
                             },
-                            title:isLogin? "Login" : "Register",
+                            title: isLogin ? "Login" : "Register",
                           ),
-
                           TextButton(
                             onPressed: () {
-                             context.go(isLogin ? "/register" : "/login");
+                              context.go(isLogin ? "/login" : "/register",
+                                  extra: isLogin ? true : false);
                             },
-                            child: Text(isLogin ? "Don't have an account? Register" : "Already have an account? Login"),
+                            child: Text(isLogin
+                                ? "Don't have an account? Register"
+                                : "Already have an account? Login"),
                           ),
                         ],
                       );
